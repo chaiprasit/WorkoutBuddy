@@ -1,30 +1,44 @@
 [
     {
-      "title": "Glutes",
-      "img": "assets/ex1.png"
+      "title": "Squat Kickback",
+      "time": "60 seconds",
+      "thumbnail": "assets/thumbnail1.jpg",
+      "videoUrl": "https://youtu.be/06DMc1EP-Sk"
     },
     {
-      "title": "Abs",
-      "img": "assets/ex1.png"
+      "title": "Squat with Side Leg Lift",
+      "time": "120 seconds",
+      "thumbnail": "assets/thumbnail2.jpg",
+      "videoUrl": "https://youtu.be/06DMc1EP-Sk"
     },
     {
-      "title": "Legs",
-      "img": "assets/ex1.png"
+      "title": "Leg press",
+      "time": "90 seconds",
+      "thumbnail": "assets/thumbnail1.jpg",
+      "videoUrl": "https://youtu.be/06DMc1EP-Sk"
     },
     {
-      "title": "Arms",
-      "img": "assets/ex1.png"
+      "title": "Leg extensions",
+      "time": "60 seconds",
+      "thumbnail": "assets/thumbnail2.jpg",
+      "videoUrl": "https://youtu.be/06DMc1EP-Sk"
     },
     {
-      "title": "Legs",
-      "img": "assets/ex1.png"
+      "title": "Leg curl",
+      "time": "90 seconds",
+      "thumbnail": "assets/thumbnail1.jpg",
+      "videoUrl": "https://youtu.be/06DMc1EP-Sk"
     },
     {
-      "title": "Arms",
-      "img": "assets/ex1.png"
+      "title": "Snatch",
+      "time": "120 seconds",
+      "thumbnail": "assets/thumbnail2.jpg",
+      "videoUrl": "https://youtu.be/06DMc1EP-Sk"
     },
     {
-      "title": "Arms",
-      "img": "assets/ex1.png"
+      "title": "Deaflift",
+      "time": "60 seconds",
+      "thumbnail": "assets/thumbnail1.jpg",
+      "videoUrl": "https://youtu.be/06DMc1EP-Sk"
     }
   ]
