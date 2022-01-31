@@ -9,11 +9,27 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class InitState extends State<SignUpScreen> {
+
+  final fullname = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final confirmpassword = TextEditingController();
+  final phone = TextEditingController();
+
+  bool _fullname = false;
+  bool _email = false;
+  bool _password = false;
+  bool _confirmpassword = false;
+  bool _phone = false;
+
   @override
   Widget build(BuildContext context) {
     return initWidget();
 
   }
+
+  
+
 
   Widget initWidget() {
     return Scaffold(
@@ -72,6 +88,16 @@ class InitState extends State<SignUpScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                controller: fullname,
+                onChanged: (content){
+                  if(content.isEmpty){
+                    setState(() {_fullname = true;});
+                  }
+                  else {
+                    setState(() {_fullname = false;});
+                  }
+                  
+                },
                 cursorColor: Color(0xffF5591F),
                 decoration: InputDecoration(
                   icon: Icon(
@@ -79,9 +105,11 @@ class InitState extends State<SignUpScreen> {
                     color: Color(0xffF5591F),
                   ),
                   hintText: "Full Name",
+                  errorText: _fullname? "Please enter your full name": null,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   ),
+                  
               ),
             ),
 
@@ -99,6 +127,16 @@ class InitState extends State<SignUpScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                onChanged: (content){
+                  if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[com]").hasMatch(content)){
+                    setState(() {_email=true;});    
+                    }
+                  else {
+                    setState(() {_email=false;});
+                  }
+                  
+                },
+                controller: email,
                 cursorColor: Color(0xffF5591F),
                 decoration: InputDecoration(
                   icon: Icon(
@@ -106,6 +144,7 @@ class InitState extends State<SignUpScreen> {
                     color: Color(0xffF5591F),
                   ),
                   hintText: "Enter Email",
+                  errorText: _email? "Please a valid Email": null,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   ),
@@ -126,6 +165,17 @@ class InitState extends State<SignUpScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                onChanged: (content){
+                  if(content.isEmpty){
+                    setState(() {_phone = true;});
+                  }
+                  else {
+                    setState(() {_phone=false;});
+                  }
+                  
+                },
+                keyboardType: TextInputType.number,
+                controller: phone,
                 cursorColor: Color(0xffF5591F),
                 decoration: InputDecoration(
                   icon: Icon(
@@ -133,6 +183,7 @@ class InitState extends State<SignUpScreen> {
                     color: Color(0xffF5591F),
                   ),
                   hintText: "Phone Number",
+                  errorText: _phone? "Please enter your phone number": null,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   ),
@@ -153,6 +204,16 @@ class InitState extends State<SignUpScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                onChanged: (content){
+                  if(content.isEmpty){
+                    setState(() {_password = true;});
+                  }
+                  else {
+                    setState(() {_password=false;});
+                  }
+                  
+                },
+                controller: password,
                 obscureText: true,
                 cursorColor: Color(0xffF5591F),
                 decoration: InputDecoration(
@@ -161,15 +222,56 @@ class InitState extends State<SignUpScreen> {
                     color: Color(0xffF5591F),
                   ),
                   hintText: "Enter Password",
+                  errorText: _password? "Please enter your password": null,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   ),
               ),
             ),
 
+            Container(
+              margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+              padding: EdgeInsets.only(left: 20, right:20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.grey[200],
+                boxShadow: [BoxShadow(
+                  offset: Offset(0, 10),
+                  blurRadius: 58,
+                  color: Color(0xffEEEEEE)
+                )],
+              ),
+              alignment: Alignment.center,
+              child: TextField(
+                onChanged: (content){
+                  if(content != password.text){
+                    setState(() {_confirmpassword = true;});
+                  }
+                  else {
+                    setState(() {_confirmpassword=false;});
+                  }
+                  
+                },
+                controller: confirmpassword,
+                obscureText: true,
+                cursorColor: Color(0xffF5591F),
+                decoration: InputDecoration(
+                  icon: Icon(
+                    Icons.vpn_key, 
+                    color: Color(0xffF5591F),
+                  ),
+                  hintText: "Confirm Password",
+                  errorText: _confirmpassword? "Password does not match": null,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  ),
+                  
+              ),
+            ),
+
             GestureDetector(
               onTap: () => {
-                /*Write onClick code*/
+                print(email.text + fullname.text + password.text + confirmpassword.text),
 
               },    
               child: Container(
@@ -212,6 +314,7 @@ class InitState extends State<SignUpScreen> {
                       "Login Now",
                       style: TextStyle(
                         color: Color(0xffF5591F)
+                        
                       ),
                       ),
                   )

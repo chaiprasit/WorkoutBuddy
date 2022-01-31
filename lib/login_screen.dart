@@ -10,10 +10,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class InitState extends State<LoginScreen> {
+  final email = TextEditingController();
+  final password = TextEditingController();
+
+  bool _email = false;
+  bool _password = false;
+
   @override
   Widget build(BuildContext context) {
     return initWidget();
   }
+
+
 
 
   Widget initWidget() {
@@ -72,6 +80,16 @@ class InitState extends State<LoginScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                onChanged: (content){
+                  if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[com]").hasMatch(content)){
+                    setState(() {_email=true;});    
+                    }
+                  else {
+                    setState(() {_email=false;});
+                  }
+                  
+                },
+                controller: email,
                 cursorColor: Color(0xffF5591F),
                 decoration: InputDecoration(
                   icon: Icon(
@@ -79,6 +97,7 @@ class InitState extends State<LoginScreen> {
                     color: Color(0xffF5591F),
                   ),
                   hintText: "Enter Email",
+                  errorText: _email? "Please a valid Email": null,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   ),
@@ -99,6 +118,16 @@ class InitState extends State<LoginScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                onChanged: (content){
+                  if(content.isEmpty){
+                    setState(() {_password = true;});
+                  }
+                  else {
+                    setState(() {_password=false;});
+                  }
+                  
+                },
+                controller: password,
                 obscureText: true,
                 cursorColor: Color(0xffF5591F),
                 decoration: InputDecoration(
@@ -107,6 +136,7 @@ class InitState extends State<LoginScreen> {
                     color: Color(0xffF5591F),
                   ),
                   hintText: "Enter Password",
+                  errorText: _password? "Please enter your password": null,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   ),
@@ -125,7 +155,7 @@ class InitState extends State<LoginScreen> {
             ),
             GestureDetector(
               onTap: () => {
-                /*Write onClick code*/
+                print(email.text + password.text),
 
               },    
               child: Container(
@@ -151,6 +181,7 @@ class InitState extends State<LoginScreen> {
                   color: Colors.white,
                 ),
                 ),
+                
               ),
             ),
 
