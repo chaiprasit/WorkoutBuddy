@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workoutbuddyapp/video_info.dart';
 import 'package:get/get.dart';
+import 'package:workoutbuddyapp/splash_screen.dart';
 import 'homepage.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: ViedeoInfo(),
+      home: SplashScreen(),
     );
   }
 }

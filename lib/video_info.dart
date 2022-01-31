@@ -248,11 +248,15 @@ class _ViedeoInfoState extends State<ViedeoInfo> {
         child: VideoPlayer(controller),
       );
     }else{
-      return Text("Being initialized pls wait");
+      return Container(
+        height: 300,
+        width: 300,
+        child: VideoPlayer(controller),
+      );
     }
   }
   _onTapVideo(int index){
-    final controller = VideoPlayerController.network(videoInfo[index]["videoUrl"]);
+    final controller = VideoPlayerController.network("https://youtu.be/06DMc1EP-Sk");
     _controller=controller;
     setState(() {
 
