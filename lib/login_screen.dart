@@ -1,7 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'homepage.dart';
 import 'signup_screen.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -15,6 +21,38 @@ class InitState extends State<LoginScreen> {
 
   bool _email = false;
   bool _password = false;
+  bool isLoading = false;
+
+  void login() async {
+    String url = 'http://10.5.50.171:4000/user/login';
+    Map<String, String> headers = {"Content-type": "application/json"};
+    String json =
+        '{"email":"${email.text}","password":"${password.text}"}';
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: json);
+    final res = jsonDecode(response.body);
+    setState(() {isLoading = false;});
+    print(res["data"]);
+    if (res["message"] == "success") {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('data', res["data"].toString());
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    }
+  }
+
+  void checkLogin() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? data = prefs.getString('data');
+    Map<String, dynamic> payload = Jwt.parseJwt(data.toString());
+    print(payload);
+  }
+
+  @override
+  void initState() {
+    checkLogin();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +193,8 @@ class InitState extends State<LoginScreen> {
             ),
             GestureDetector(
               onTap: () => {
-                print(email.text + password.text),
+                setState(() {isLoading = true;}),
+                login()
 
               },    
               child: Container(
@@ -176,7 +215,8 @@ class InitState extends State<LoginScreen> {
                   color: Color(0xffEEEEEE)
                 )], 
                 ),
-                child: Text("Login",
+                child: isLoading ? CircularProgressIndicator(color: Colors.white): 
+                Text("Login",
                 style: TextStyle(
                   color: Colors.white,
                 ),

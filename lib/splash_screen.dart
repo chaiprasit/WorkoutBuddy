@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:jwt_decode/jwt_decode.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workoutbuddyapp/login_screen.dart';
+
+import 'homepage.dart';
 
 class SplashScreen extends StatefulWidget{
   @override
@@ -21,13 +25,30 @@ class InitState extends State<SplashScreen> {
 
   startTimer() {
     var duration = Duration(seconds: 3);
-    return new Timer(duration, loginRoute);
+    return new Timer(duration,checkLogin);
   }
 
   loginRoute() {
     Navigator.pushReplacement(context, MaterialPageRoute(
       builder: (context) => LoginScreen()
       ));
+  }
+
+  void checkLogin() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? data = prefs.getString('data');
+    // Map<String, dynamic> payload = Jwt.parseJwt(data.toString());
+    if(data != null){
+      Navigator.pushReplacement(context, MaterialPageRoute(
+      builder: (context) => HomePage()
+      ));
+    }
+    else{
+      Navigator.pushReplacement(context, MaterialPageRoute(
+      builder: (context) => LoginScreen()
+      ));
+    }
+    // print(payload);
   }
   
   @override

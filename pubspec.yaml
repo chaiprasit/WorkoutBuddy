@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   get:
   video_player:
+  http: ^0.13.4
+  shared_preferences: ^2.0.12
+  jwt_decode: ^0.3.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
